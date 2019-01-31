@@ -32,7 +32,7 @@ public class DefaultRowSetMetaData implements RowSetMetaData {
 
     private final ColumnNameExtractor columnNameExtractor;
 
-    DefaultRowSetMetaData(Sheet sheet, ColumnNameExtractor columnNameExtractor) {
+    public DefaultRowSetMetaData(Sheet sheet, ColumnNameExtractor columnNameExtractor) {
         this.sheet = sheet;
         this.columnNameExtractor = columnNameExtractor;
     }

@@ -35,7 +35,7 @@ public class DefaultRowSet implements RowSet {
     private int currentRowIndex = -1;
     private String[] currentRow;
 
-    DefaultRowSet(Sheet sheet, RowSetMetaData metaData) {
+    public DefaultRowSet(Sheet sheet, RowSetMetaData metaData) {
         this.sheet = sheet;
         this.metaData = metaData;
     }
