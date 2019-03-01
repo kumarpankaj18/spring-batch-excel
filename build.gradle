@@ -4,7 +4,7 @@ apply plugin: 'signing'
 apply plugin: 'maven-publish'
 
 group = 'com.github.kumarpankaj18'
-version = '1.0.4'
+version = '1.0.5'
 
 description = "Excel Iteam reader for spring batch"
 
@@ -14,6 +14,13 @@ targetCompatibility = 1.8
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
+
+//artifacts {
+//    archives jar
+//    archives sourceJar
+//    archives javadocJar
+//}
+
 
 signing {
     sign configurations.archives
@@ -25,7 +32,7 @@ publishing {
             customizePom(pom)
             groupId = 'com.github.kumarpankaj18'
             artifactId = 'spring-batch-excel'
-            version = '1.0.4'
+            version = '1.0.5'
             from components.java
             artifact(sourceJar) {
                 classifier = 'sources'
@@ -47,7 +54,7 @@ publishing {
             // create the signed artifacts
             tasks.signArchives.signatureFiles.each {
                 artifact(it) {
-                    def matcher = it.file =~ /(sources|javadoc)\.jar|\.asc/
+                    def matcher = it.file =~ /-(sources|javadoc)\.jar|\.asc$/
                     if (matcher.find()) {
                         classifier = matcher.group(1)
                     } else {
@@ -78,6 +85,12 @@ task sourceJar(type: Jar, dependsOn: classes) {
 task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
+}
+
+artifacts {
+    archives jar
+    archives sourceJar
+    archives javadocJar
 }
 
 repositories {
