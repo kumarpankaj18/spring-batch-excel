@@ -16,6 +16,7 @@
 
 package org.springframework.batch.item.excel.poi;
 
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
@@ -36,10 +37,24 @@ import java.io.InputStream;
 public class PoiItemReader<T> extends AbstractExcelItemReader<T> {
 
     private Workbook workbook;
+    private boolean useDefaultCellType;
 
     @Override
     protected Sheet getSheet(final int sheet) {
-        return new PoiSheet(this.workbook.getSheetAt(sheet));
+        if(useDefaultCellType) {
+            return new DefaulltMappingPoiSheet(this.workbook.getSheetAt(sheet));
+        } else {
+            return new PoiSheet(this.workbook.getSheetAt(sheet));
+        }
+    }
+    
+    public PoiItemReader(){
+        super();
+    }
+    
+    public PoiItemReader(boolean useDefaultCellType){
+        super();
+        this.useDefaultCellType = useDefaultCellType;
     }
 
     @Override

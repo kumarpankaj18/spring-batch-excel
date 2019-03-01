@@ -36,7 +36,7 @@ import java.util.List;
  */
 class PoiSheet implements Sheet {
 
-    private final org.apache.poi.ss.usermodel.Sheet delegate;
+    protected final org.apache.poi.ss.usermodel.Sheet delegate;
     private final int numberOfRows;
     private final String name;
 
